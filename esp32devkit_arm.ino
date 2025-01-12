@@ -21,7 +21,6 @@ int SERVO_B_POS = 0;
 
 #define FORMAT_SPIFFS_IF_FAILED true
 
-// Replace with your network credentials
 const char* ssid = "";
 const char* password = "";
 
@@ -36,7 +35,7 @@ void servo_balance(Servo &SERVO_, int &CRNT_POS) {
 void servo_control(Servo &SERVO_, int CRNT_POS) {
     SERVO_.write(CRNT_POS);
 }
-// Create AsyncWebServer object on port 80
+
 AsyncWebServer server(80);
 
 void servo_balance(Servo &SERVO_, int &CRNT_POS);
@@ -145,7 +144,6 @@ void setup(){
   SERVO_LR.attach(SERVO_LR_PIN);
   SERVO_B.attach(SERVO_B_PIN);
 
-    // Serial port for debugging purposes
   Serial.begin(115200);
 
   servo_balance(SERVO_P, SERVO_P_POS);
@@ -165,10 +163,8 @@ void setup(){
     Serial.println("Connecting to WiFi..");
   }
 
-  // Print ESP Local IP Address
   Serial.println(WiFi.localIP());
-
-  // Route for root / web page
+  
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send_P(200, "text/html", index_html);
   });
@@ -185,8 +181,6 @@ server.on("/move", HTTP_GET, [] (AsyncWebServerRequest *request) {
     Serial.print(joint);
     Serial.print(" & ");
     Serial.println(directions);
-    
-    //int move_state = state.toInt();
 
     if(joint.equals("P")) { servo_control(SERVO_P, directions_); }
     if(joint.equals("M")) { servo_control(SERVO_M, directions_); }
@@ -198,7 +192,6 @@ server.on("/move", HTTP_GET, [] (AsyncWebServerRequest *request) {
   
 });
 
-  // Start server
   server.begin();
 }
 
