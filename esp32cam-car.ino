@@ -8,7 +8,6 @@
 #include "soc/rtc_cntl_reg.h"    
 #include "esp_http_server.h"
 
-// Replace with your network credentials
 const char* ssid = "";
 const char* password = "";
 
@@ -325,7 +324,6 @@ void setup() {
     config.fb_count = 1;
   }
   
-  // Camera init
   esp_err_t err = esp_camera_init(&config);
   if (err != ESP_OK) {
     Serial.printf("Camera init failed with error 0x%x", err);
