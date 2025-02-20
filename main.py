@@ -126,11 +126,69 @@ def index():
     return '''\
         <html>
             <head>
-                <title>Raspberry Pi Camera</title>
+                <title>Robot Control</title>
+                <script>
+                    let baseUrl1 = "";
+                    let baseUrl2 = "";
+
+                    function setBaseUrls() {
+                        baseUrl1 = document.getElementById("baseUrl1").value;
+                        baseUrl2 = document.getElementById("baseUrl2").value;
+                        if (baseUrl1) {
+                            document.getElementById("streamImg").src = baseUrl1 + "/stream";
+                        } else {
+                            alert("Enter URL to move!");
+                        }
+                    }
+
+                    function sendCommand(command) {
+                        if (baseUrl1) {
+                            fetch(baseUrl1 + "/action?go=" + command)
+                                .then(response => console.log("Command sent:", command))
+                                .catch(error => console.error("Error:", error));
+                        } else {
+                            alert("Enter URL to move!");
+                        }
+                    }
+
+                    function sendAngle(joint, value) {
+                        if (baseUrl2) {
+                            fetch(baseUrl2 + "/move?joint=" + joint + "&direction=" + value)
+                                .then(response => console.log(`Angle sent: ${joint}=${value}`))
+                                .catch(error => console.error("Error:", error));
+                        } else {
+                            alert("Enter URL to control corners!");
+                        }
+                    }
+                </script>
             </head>
             <body>
-                <h1>Raspberry Pi - Surveillance Camera</h1>
-                <img src="/video_feed" width="640" height="480">
+                <h1>Robot Control Interface</h1>
+                <img src="/video_feed" width="640" height="480"><br>
+                <h1>ESP32-CAM Robot</h1>
+                <img id="streamImg" src="/stream" width="640" height="480"><br>
+                <label>Base URL for movement:</label>
+                <input type="text" id="baseUrl1" value="http://192.168.0.100" placeholder="http://192.168.0.100/"><br>
+                <label>Base URL for angles:</label>
+                <input type="text" id="baseUrl2" value="http://192.168.0.101" placeholder="http://192.168.0.101/"><br>
+                <button onclick="setBaseUrls()">Set URLs</button>
+                
+                <h2>Movement Controls</h2>
+                <button onclick="sendCommand('forward')">Forward</button>
+                <button onclick="sendCommand('backward')">Backward</button>
+                <button onclick="sendCommand('left')">Left</button>
+                <button onclick="sendCommand('right')">Right</button>
+                <button onclick="sendCommand('stop')">Stop</button>
+
+                <h2>Joint Control</h2>
+                <label>P:</label>
+                <input type="range" min="0" max="180" onchange="sendAngle('P', this.value)">
+                <label>M:</label>
+                <input type="range" min="0" max="180" onchange="sendAngle('M', this.value)">
+                <label>LR:</label>
+                <input type="range" min="0" max="180" onchange="sendAngle('LR', this.value)">
+                <label>B:</label>
+                <input type="range" min="0" max="180" onchange="sendAngle('B', this.value)">
             </body>
         </html>
     '''
