@@ -11,10 +11,21 @@ import pytz
 import threading
 from flask import Flask, Response, render_template
 from deepface import DeepFace 
+from g4f.client import Client
 
 app = Flask(__name__)
 
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
+def ask_chatgpt(prompt):
+    client = Client()
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}],
+        web_search=False
+    )
+    print(response.choices[0].message.content)
+    return response.choices[0].message.content
 
 def gen():
     while True:
@@ -118,6 +129,11 @@ def voice_command_loop():
                 current_date_time = get_current_date_time()
                 print(f"The current date and time is: {current_date_time}")
                 speak(f"The current date and time is: {current_date_time}")
+            elif "chat" in speech.lower():
+                print("Chat find : " + speech[9:])
+                response = ask_chatgpt(speech[9:])
+                print("Response ChatGPT:", response)
+                speak(response)
             else:
                 print("I didn't understand your request.")
 
