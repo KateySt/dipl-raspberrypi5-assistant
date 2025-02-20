@@ -99,7 +99,7 @@ def search_wikipedia(query):
         speak("Sorry, I couldn't find any information on Wikipedia for that search.")
 
 def get_current_date_time():
-    local_time = datetime.now(pytz.timezone("Europe/Moscow"))
+    local_time = datetime.now(pytz.timezone("Europe/Kyiv"))
     return local_time.strftime("%A, %d %B %Y, %I:%M %p")
 
 def voice_command_loop():
