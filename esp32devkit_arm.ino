@@ -263,7 +263,7 @@ server.on("/action", HTTP_GET, [] (AsyncWebServerRequest *request) {
     digitalWrite(MOTOR_2_PIN_1, 0);
     digitalWrite(MOTOR_2_PIN_2, 1);
   }
-  else if(!strcmp(variable, "stop")) {
+  else if(go.equals("stop")) {
     Serial.println("Stop");
     digitalWrite(MOTOR_1_PIN_1, 0);
     digitalWrite(MOTOR_1_PIN_2, 0);
