@@ -169,7 +169,7 @@ def index():
 
                     function sendAngle(joint, value) {
                         if (baseUrl2) {
-                            fetch(baseUrl2 + "/move?joint=" + joint + "&direction=" + value)
+                            fetch(baseUrl1 + "/move?joint=" + joint + "&direction=" + value)
                                 .then(response => console.log(`Angle sent: ${joint}=${value}`))
                                 .catch(error => console.error("Error:", error));
                         } else {
