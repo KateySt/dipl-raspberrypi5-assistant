@@ -14,10 +14,10 @@ Servo SERVO_B;
 #define SERVO_LR_PIN 33
 #define SERVO_B_PIN 25
 
-#define MOTOR_1_PIN_1 14
-#define MOTOR_1_PIN_2 32
-#define MOTOR_2_PIN_1 34
-#define MOTOR_2_PIN_2 35
+#define MOTOR_1_PIN_1 18
+#define MOTOR_1_PIN_2 19
+#define MOTOR_2_PIN_1 21
+#define MOTOR_2_PIN_2 22
 
 int SERVO_P_POS = 0;
 int SERVO_M_POS = 0;
