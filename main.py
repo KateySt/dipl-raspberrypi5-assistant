@@ -14,7 +14,6 @@ from deepface import DeepFace
 from g4f.client import Client
 
 app = Flask(__name__)
-
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 def ask_chatgpt(prompt):
