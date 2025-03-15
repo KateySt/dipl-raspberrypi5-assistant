@@ -183,9 +183,9 @@ def index():
                 <h1>ESP32-CAM Robot</h1>
                 <img id="streamImg" src="/stream" width="640" height="480"><br>
                 <label>Base URL for movement:</label>
-                <input type="text" id="baseUrl1" value="http://192.168.0.100" placeholder="http://192.168.0.100/"><br>
+                <input type="text" id="baseUrl1" value="http://192.168.0.100" ><br>
                 <label>Base URL for angles:</label>
-                <input type="text" id="baseUrl2" value="http://192.168.0.101" placeholder="http://192.168.0.101/"><br>
+                <input type="text" id="baseUrl2" value="http://192.168.0.101" ><br>
                 <button onclick="setBaseUrls()">Set URLs</button>
                 
                 <h2>Movement Controls</h2>
