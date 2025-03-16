@@ -213,6 +213,7 @@ def video_feed():
     return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == '__main__':
+    
     voice_thread = threading.Thread(target=voice_command_loop)
     voice_thread.daemon = True
     voice_thread.start()
